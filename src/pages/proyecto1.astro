@@ -1,0 +1,123 @@
+---
+import Layout from "../layout/Layout.astro";
+---
+
+<Layout>
+  <div slot="article" class="w-full flex mt-5 mb-5 justify-center">
+    <div id="div1">
+      <img id="card0" src="/tapa.jpg" onclick="voltearCarta(0);"/>
+      <img id="card1" src="/tapa.jpg" />
+      <img id="card2" src="/tapa.jpg" />
+    </div>
+    <div id="div2">
+      <img id="card3" src="/tapa.jpg" />
+      <img id="card4" src="/tapa.jpg" />
+      <img id="card5" src="/tapa.jpg" />
+    </div>
+    <div id="div3">
+      <img id="card6" src="/tapa.jpg" />
+      <img id="card7" src="/tapa.jpg" />
+      <img id="card8" src="/tapa.jpg" />
+    </div>
+    <div id="div4">
+      <img id="card9" src="/tapa.jpg" />
+      <img id="card10" src="/tapa.jpg" />
+      <img id="card11" src="/tapa.jpg" />
+    </div>
+  </div>
+  <style>
+    img {
+      height: 175px;
+      width: 150px;
+      margin: 10px;
+      border: 5px solid #452c03;
+      border-radius: 10%;
+    }
+    img:hover {
+      transform: scale(1.1, 1.1);
+    }
+  </style>
+</Layout>
+<script>
+  let numsA = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+
+  let imgArr = [
+    "/carta1.png",
+    "/carta2.jpg",
+    "/carta3.png",
+    "/carta4.png",
+    "/carta5.png",
+    "/carta6.png",
+    "/carta1.png",
+    "/carta2.jpg",
+    "/carta3.png",
+    "/carta4.png",
+    "/carta5.png",
+    "/carta6.png",
+  ];
+
+  let carV = [];
+  let carVID = [];
+  let win = 0;
+
+  let i = numsA.length,
+    j,
+    temp;
+  while (--i > 0) {
+    j = Math.floor(Math.random() * (i + 1));
+    temp = numsA[j];
+    numsA[j] = numsA[i];
+    numsA[i] = temp;
+  }
+
+  function voltearCarta(p) {
+    document.getElementById("card" + p).src = imgArr[numsA[p]];
+    carV.push(document.getElementById("card" + p).src);
+    carVID.push(document.getElementById("card" + p).id);
+    if (carV.length == 2) {
+      setTimeout(() => {
+        if (carV[0] != carV[1]) {
+          document.getElementById(carVID[0]).src = "/tapa.jpg";
+          document.getElementById(carVID[1]).src = "/tapa.jpg";
+        } else {
+          win += 2;
+          ganar();
+        }
+        carV = [];
+        carVID = [];
+      }, 250);
+    }
+  }
+
+  function ganar() {
+    if (win == 12) {
+      win = 0;
+      setTimeout(() => {
+        for (let i = 0; i < 12; i++) {
+          document.getElementById("card" + i).src = "/tapa.jpg";
+        }
+      }, 1000);
+      let i = numsA.length,
+        j,
+        temp;
+      while (--i > 0) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = numsA[j];
+        numsA[j] = numsA[i];
+        numsA[i] = temp;
+      }
+    }
+  }
+  document.getElementById("card0").addEventListener("click", () => {voltearCarta(0)});
+  document.getElementById("card1").addEventListener("click", () => {voltearCarta(1)});
+  document.getElementById("card2").addEventListener("click", () => {voltearCarta(2)});
+  document.getElementById("card3").addEventListener("click", () => {voltearCarta(3)});
+  document.getElementById("card4").addEventListener("click", () => {voltearCarta(4)});
+  document.getElementById("card5").addEventListener("click", () => {voltearCarta(5)});
+  document.getElementById("card6").addEventListener("click", () => {voltearCarta(6)});
+  document.getElementById("card7").addEventListener("click", () => {voltearCarta(7)});
+  document.getElementById("card8").addEventListener("click", () => {voltearCarta(8)});
+  document.getElementById("card9").addEventListener("click", () => {voltearCarta(9)});
+  document.getElementById("card10").addEventListener("click", () => {voltearCarta(10)});
+  document.getElementById("card11").addEventListener("click", () => {voltearCarta(11)});
+</script>
