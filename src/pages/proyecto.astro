@@ -11,8 +11,8 @@ const proyecto =await getCollection("proyectos");
 				{ proyecto.map((project)=>(
 				<Proyecto
 					title={project.data.title}
+					img={project.data.img}
 					link={project.data.link}
-					description={project.data.description}
 					/>
 				))
 				}
