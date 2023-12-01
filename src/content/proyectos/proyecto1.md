@@ -1,5 +1,5 @@
 ---
 title: "Memorama"
+img: "/memo.jpg"
 link: "/proyecto1/"
-description: "Este es el proyecto 1"
 ---
